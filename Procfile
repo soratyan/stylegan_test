@@ -1,1 +1,1 @@
-web: gunicorn sample_app.wsgi --log-file -
+web: gunicorn style_gan_test.wsgi --log-file -
