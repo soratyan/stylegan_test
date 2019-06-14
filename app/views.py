@@ -46,4 +46,19 @@ def form(request):
     return render(request,'app1/index.html', params)
 
 class IndexTemplateView(TemplateView):
-    template_name = "index.html"
+    def __init__(self):
+        self.params = {
+            'title':'Hello World',
+            'msg':'ちゃんと挨拶したいので情報の登録をしてください',
+            'form': Indexform(),
+            'gopage':'secondindex'
+        }
+
+    def get(self,request):
+        return render(request,'app1/index.html',self.params)
+
+    def post(self,request):
+        msg = 'こんにちは!'+request.POST['name']+'さん!<br>'+request.POST['area']+'にお住まいで<br>年齢は'+request.POST['age']+'歳なんですね!<br>よろしくお願いします。'
+        self.params["msg"] = msg
+        self.params['form'] = Indexform(request.POST)
+        return render(request,'app1/index.html',self.params)
