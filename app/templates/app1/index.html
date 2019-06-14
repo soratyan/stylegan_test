@@ -1,14 +1,45 @@
+
+{% load static %}
+
 <!doctype html>
+<!--
 <html lang="ja">
     <head>
         <meta charset="utf-8">
         <title>{{title}}</title>
+        <link rel="stylesheet" type="text/css"
+        href="{% static 'app1/css/style.css' %}"/>　
     </head>
     <body>
         <h1>{{title}}</h1>　　　
         <p>{{msg}}世界</p>
-        <p>{{msg}}世界</p>
-        <p>{{msg}}世界</p>
-        <p><a href="{% url gopage %}">{{gopage}}</a></p> <!--ここ-->
+
+        <p><a href="{% url gopage %}">{{gopage}}</a></p>
+
+        <form action= "{% url 'form' %}" method = "post">
+            {% csrf_token %}
+            <label for = "msg">ここに入力：</label>
+            <input id = "msg" type="text" name ="msg">
+            <input type="submit" value="入力"> 
+        </form>
+    </body>
+</html>
+-->
+
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>{{title}}</title>
+        <link rel="stylesheet" type="text/css"
+        href="{% static 'app1/css/style.css' %}"/>
+    </head>
+    <body>
+        <h1>{{title}}</h1>　　　
+        <p>{{msg|safe}}</p><!--ここでviews.pyのhtmlを有効化-->
+        <form action= "{% url 'index' %}" method = "post">
+            {% csrf_token %}
+            {{form.as_ul}} <!--ここ-->
+            <input type="submit" value="入力">
+        </form>
     </body>
 </html>
