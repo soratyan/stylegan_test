@@ -3,6 +3,8 @@ from django.contrib import admin
 
 # Taskモデルをインポート
 from .models import Task
+from .models import User
 
 # 管理サイトへのモデルを登録
 admin.site.register(Task)
+admin.site.register(User)
